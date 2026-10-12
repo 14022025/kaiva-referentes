@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Concepto 1 y 2 Kaiva</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: documento de lectura de una columna (72ch), como el PDF del curso; listo para imprimir. */
+:root{
+  --bg:#FFFFFF; --ink:#16171C; --ink-2:#4A4F5C; --ink-3:#737887; --line:#E5E6EB; --soft:#F6F6F8;
+  --accent:#8242F5; --accent-soft:#F1EBFE; --ok:#15803D; --warn:#A16207; --todo:#737887;
+  --f-head:"Newsreader", Georgia, "Times New Roman", serif; --f-body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111216; --ink:#ECEDF1; --ink-2:#B4B8C4; --ink-3:#8B90A0; --line:#2A2C34; --soft:#1A1B21;
+  --accent:#A57BFF; --accent-soft:#231A37; --ok:#5BC683; --warn:#E5B04B; --todo:#8B90A0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111216; --ink:#ECEDF1; --ink-2:#B4B8C4; --ink-3:#8B90A0; --line:#2A2C34; --soft:#1A1B21;
+  --accent:#A57BFF; --accent-soft:#231A37; --ok:#5BC683; --warn:#E5B04B; --todo:#8B90A0; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.62}
+main{max-width:760px;margin:0 auto;padding-inline:20px;padding-block:40px 80px}
+h1,h2,h3{font-family:var(--f-head);font-weight:400;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,44px);line-height:1.1}
+h2{font-size:32px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-size:22px;margin-top:32px}
+h4{font-family:var(--f-head);font-weight:500;font-size:18px;margin:24px 0 6px}
+p,li{text-wrap:pretty}
+p{margin:10px 0}
+.meta{color:var(--ink-3);font-size:13px;margin-top:10px}
+.legend{background:var(--soft);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--ink-2);margin-top:18px}
+.course{color:var(--ink-2)}
+.r{margin:12px 0;padding:10px 14px;border-left:3px solid var(--line)}
+.r b{font-weight:600}
+.r.new{border-left-color:var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+.r .src{display:block;font-size:13px;color:var(--ink-3);margin-top:4px}
+a{color:var(--accent)}
+.st{font-size:13px;white-space:nowrap}
+ol.ideas{padding-left:22px}
+ol.ideas li{margin:10px 0}
+ol.ideas li small{display:block;color:var(--ink-3);font-size:13px}
+.changes{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-top:24px}
+.changes h3{margin-top:0;font-size:20px}
+.changes ul{margin:8px 0 0;padding-left:20px}
+.tablebox{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+@media print{body{font-size:12pt} h2{break-before:page} a{color:inherit}}
+
+.tema{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);right:14px;z-index:20;display:flex;gap:2px;padding:3px;border-radius:999px;background:var(--bg);border:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.tema button{font:inherit;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;border:0;background:none;color:var(--ink-2);cursor:pointer}
+.tema button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tema button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media print{.tema{display:none}}
+</style>
+</head>
+<body>
+<div class="tema" role="group" aria-label="Color de fondo"><button type="button" data-tema="light" aria-pressed="true">Fondo blanco</button><button type="button" data-tema="dark" aria-pressed="false">Fondo negro</button></div>
+<script>
+(function(){
+  var raiz = document.documentElement, clave = "kaiva-tema";
+  function poner(t){ raiz.setAttribute("data-theme", t);
+    document.querySelectorAll(".tema button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.tema === t); });
+    try { localStorage.setItem(clave, t); } catch (e) {} }
+  var guardado = "light"; try { guardado = localStorage.getItem(clave) || "light"; } catch (e) {}
+  poner(guardado);
+  document.querySelectorAll(".tema button").forEach(function(b){ b.addEventListener("click", function(){ poner(b.dataset.tema); }); });
+})();
+</script>
+
+<main><p style="margin:0 0 18px"><a href="./" style="font-size:13px">← Volver al inicio</a></p>
+<h1>Concepto 1 y 2 – Kaiva</h1>
+<p class="meta">Actualizado el 12 de octubre de 2026 con el análisis de Instagram de 14 cuentas (32 Reels y 305 carruseles medidos). El detalle visual, con imágenes y enlaces, está en <b>Referentes Instagram Kaiva.html</b>.</p>
+<div class="legend">Leyenda: ✅ listo · 🟡 borrador por validar · ⬜ falta. Las preguntas y textos son los del PDF del curso; las respuestas "R//" son de Kaiva. Lo nuevo de esta versión va resaltado en violeta.</div>
+
+<div class="changes">
+  <h3>Qué cambió en esta versión</h3>
+  <ul>
+    <li>Ganchos, formatos, temas y recursos visuales: completos, con ejemplos reales y sus números.</li>
+    <li>Referentes NO nicho: completos (4).</li>
+    <li>Las 20 ideas de contenido: completas, cada una con la pieza de la que sale.</li>
+    <li>Corrección: MatiKali no es de Barranquilla. Es de Ciudad de México y Querétaro, como dice el workbook.</li>
+    <li>Se suman como referentes de nicho @agenciarosa y @atnndesign, que salieron muy bien en el análisis.</li>
+    <li>Monks, Núcleo, Bangluxor y Contra Studio ya están revisados. Monks es @madebymonks, Bangluxor es @bangluxor y Contra Studio es @contra_studio_; Núcleo no tiene Instagram. Ninguno sirve como referente de contenido: sus webs son buenas, pero en Instagram casi no tienen alcance o publican muy poco.</li>
+  </ul>
+</div>
+
+<h2>CONCEPTO 1 – Investigación de mercado</h2>
+
+<h3>· Introducción ·</h3>
+<div class="course">
+<p>En esta lección voy a explicarte cómo hacer tu investigación de mercado.</p>
+<p>El objetivo es que entiendas qué es lo que está funcionando en tu nicho (y qué no), para que puedas hacerte un hueco real en ese mercado a través de redes sociales.</p>
+<p>Uno de los mayores errores que cometen las personas cuando empiezan a crear contenido es basarse en lo que creen que va a funcionar. Y ahí está el problema. Porque tú no sabes lo que va a funcionar. Y mientras más rápido lo aceptes, más rápido vas a empezar a ver resultados.</p>
+<p>Por eso, en INSIGNIA empezamos con una base sólida: claridad de lo que sí funciona, no porque lo "imaginamos", sino porque lo sabemos, gracias a la investigación.</p>
+<p>Y sí: sigue siendo prueba y error. Sigue siendo necesario testear, ajustar y mejorar en el camino. Pero sin investigación, ni siquiera es prueba y error… es error tras error.</p>
+<p>Así que lo que vamos a hacer hoy es lo siguiente: yo te voy a mostrar qué información tienes que recolectar, cómo identificarla y cómo organizarla para que te sirva de verdad.</p>
+</div>
+
+<h3>· Investigación de Mercado ·</h3>
+<h4>Tema Principal</h4>
+<p class="r">R//: 🟡 Páginas web, marca y sistemas para empresas medianas.</p>
+
+<h4>Referentes de Nicho</h4>
+<p class="course">Busca referentes realistas de lo que puedes hacer. Que sean reconocidos, pero no extremadamente famosos.</p>
+<p class="r new">R//: ✅ <b>@matikali.designstudio</b> → estudio de diseño web de Ciudad de México y Querétaro (no de Barranquilla). 41,6 mil seguidores; un Reel normal saca unas 6.000 vistas. Su serie "Lugares random del internet" es lo mejor del nicho: la parte 7 llegó a 1 millón de vistas y 76 mil me gusta, y las partes 3 y 4 a 200 y 246 mil. La cara sale solo al inicio; el resto es pantalla y manos. Solo inspirarse de videos con engagement por encima del promedio.<span class="src"><a href="https://www.instagram.com/reel/DdOLA0Ws1sV/">Ver la parte 7</a></span></p>
+<p class="r new">R//: ✅ <b>@agenciarosa</b> → agencia de branding y diseño web de España, 176 mil seguidores. Habla del oficio: "¿Cuántas horas nos toma un branding?" sacó 311 mil vistas y 195 comentarios, y su carrusel "Le pedimos a ChatGPT que diseñara una marca por nosotras" es el que más me gusta tiene (12.679). Solo inspirarse de videos con engagement por encima del promedio.<span class="src"><a href="https://www.instagram.com/reel/DTVR8KyiHK5/">Ver el de las horas</a></span></p>
+<p class="r new">R//: ✅ <b>@atnndesign</b> → estudio de marca y web de EE. UU., 47,9 mil seguidores. Muestra proyectos de principio a fin con "full reveal at the end" (96 mil vistas, 6,4 me gusta por cada 100). Ojo: sus picos de 1,3 millones son colaboraciones pagadas (Logitech, Adobe) y no se emulan.<span class="src"><a href="https://www.instagram.com/reel/DbWF4rzxVUF/">Ver el proceso de la marca</a></span></p>
+<p class="r new">R//: 🟡 <b>@trespimedios</b> → estudio colombiano B2B; referencia de copy. Un Reel normal saca unas 1.800 vistas. Sus mejores Reels tienen más de 12 meses y pocos me gusta, así que sirven como idea. En carruseles sí funciona: "Tendencias de diseño 2026" sacó 7,5 veces su promedio de me gusta. Solo inspirarse de videos con engagement por encima del promedio.</p>
+<p class="r new">R//: 🟡 <b>@orbixstudiollc</b> → referencia de nivel visual y de copy; 18,6 mil seguidores. Casi solo publica carruseles de proyectos (pantallas en un monitor en perspectiva). El mejor sacó 4,3 veces su promedio. Sus Reels tienen pocos me gusta para las vistas que sacan.</p>
+<p class="r new">R//: 🟡 <b>@ingenio.la</b> → marketing digital de Honduras, 17,1 mil seguidores. Sus Reels casi no tienen me gusta (posible pauta). En carruseles funciona la palabra clave: "Comenta Potencia" sacó 935 comentarios.</p>
+<p class="r new">R//: ✅ <b>@madebymonks</b> (Monks) → 173 mil seguidores; un Reel normal saca unas 4.800 vistas. Es la web que más les gustó, pero en Instagram no sirve para copiar números: su mejor Reel (31,4 mil) es una premiación de los Webby publicada con esa cuenta, y su caso de Twitch tiene 10 mil vistas y 3 me gusta (pauta). Sirve solo como referencia visual.</p>
+<p class="r new">R//: ✅ <b>@bangluxor</b> → 9.725 seguidores. Sus Reels sacan entre 100 y 250 vistas y el último es de mediados de 2025. Su fuerte es la web, no Instagram. No sirve como referente de contenido.</p>
+<p class="r new">R//: ✅ <b>@contra_studio_</b> (Contra Studio, Bogotá) → 6.368 seguidores. Publica muy poco: 5 Reels en los últimos 15 meses. Su pico de 139 mil es de 2023, demasiado viejo para el filtro del curso. El más reciente (6.121 vistas) es un resumen de un evento. No sirve como referente de contenido.</p>
+<p class="r new">R//: ✅ <b>Núcleo Studio</b> → no tiene Instagram. Su web solo enlaza LinkedIn, y los usuarios con ese nombre en Instagram son de otros negocios. Según Sortlist es un estudio de una persona en Guadalajara. Sigue sirviendo como ejemplo de oferta en la web (precios y plazos a la vista), no de contenido.</p>
+
+<h4>Análisis de Referentes de Nicho</h4>
+<p class="r new"><b>Ganchos:</b> ✅ los primeros 3 segundos de los que mejor funcionaron:</p>
+<div class="tablebox"><table>
+<thead><tr><th>Tipo de gancho</th><th>Ejemplo real</th><th>Cuenta</th><th>Resultado</th></tr></thead>
+<tbody>
+<tr><td>Serie con número de parte</td><td>"Lugares random del internet para alimentar tu creatividad, parte 7"</td><td>MatiKali</td><td class="n">1 M vistas</td></tr>
+<tr><td>Pregunta que todos se hacen</td><td>"La pregunta del millón: ¿cuántas horas nos toma desarrollar un servicio de branding?"</td><td>Agencia Rosa</td><td class="n">311 mil</td></tr>
+<tr><td>Nombrar al público</td><td>"Lugares random del internet que si eres una mujer en la industria creativa, tienes que conocer"</td><td>MatiKali</td><td class="n">166 mil</td></tr>
+<tr><td>Dos ingredientes que no pegan</td><td>"Vamos a crear una marca y como ingredientes principales tenemos perritos y alta repostería"</td><td>Agencia Rosa</td><td class="n">90 mil</td></tr>
+<tr><td>Prometer el final</td><td>"let's design a childcare brand" + "PS: full reveal at the end!"</td><td>atnndesign</td><td class="n">96 mil</td></tr>
+<tr><td>Lista corta numerada</td><td>"Top 4 Website Design Tools (UI/UX)"</td><td>Code Zenith</td><td class="n">1,9 M</td></tr>
+<tr><td>Movimiento desde el segundo 0, sin texto</td><td>Un formulario que gira de "Login" a "Register"</td><td>Code Zenith</td><td class="n">2,9 M</td></tr>
+<tr><td>Un problema que todos sienten</td><td>"Todos hemos sentido pánico cuando nos preguntan: ¿cómo te describirías?"</td><td>Tres Pi</td><td class="n">22 mil (12×)</td></tr>
+</tbody></table></div>
+
+<p class="r new"><b>Formatos de vídeo:</b> ✅ confirmados en los referentes. Pantalla del portátil con manos y el enlace escrito encima (MatiKali). Celular apuntando al monitor en un cuarto oscuro, 12 a 14 segundos en bucle (Code Zenith). Proceso acelerado de un proyecto con "resultado al final", sin voz (atnndesign). Conteo con números grandes en pantalla mientras se ve cada tarea (Agencia Rosa). Lista rápida de 4 cosas, 2 segundos cada una (Code Zenith). Caso contado como historia, de reto a resultado y cierre con "¿lo logramos?" (Agencia Rosa).</p>
+<p class="r new"><b>Temas/ideas de contenido:</b> ✅ webs curiosas para inspirarse (en serie); cuánto tiempo y trabajo lleva un proyecto; el proceso de un proyecto real de principio a fin; herramientas y recursos en listas cortas; humano contra IA ("le pedimos a ChatGPT…"); tendencias de diseño del año; guías de medidas que se guardan; lecciones de dirigir un estudio; humor del oficio (estilo Spotify Wrapped); análisis de una marca famosa; antes y después con "pasa de esto… a esto".</p>
+<p class="r new"><b>Recursos visuales:</b> ✅ pantallas de webs funcionando (no capturas quietas), manos y teclado, un monitor en perspectiva para mostrar sistemas, números y palabras clave grandes en pantalla, subtítulos palabra por palabra. En carruseles: fondo limpio, una idea por lámina y la última lámina con una pregunta o una palabra clave para comentar.</p>
+
+<h4>Referentes NO Nicho</h4>
+<p class="r new">R//: ✅ <b>@code_zenith.ai</b> → desarrollador, no estudio; 110 mil seguidores. Solo pantalla grabada con el celular y "Comenta CODE y te mando el código": 14.843 comentarios en un Reel y 51.242 en otro. Ojo: su Reel de 13,4 millones es un anuncio pagado de Meshy, no cuenta.</p>
+<p class="r new">R//: ✅ <b>@osmo.supply</b> → recursos de Webflow, 27,4 mil seguidores. Muy constante y sin picos (un Reel normal saca unas 10.000 vistas). Sirve por su serie mensual de carruseles "Top 5 recursos de [categoría]".</p>
+<p class="r new">R//: ✅ <b>@dailywebdesign</b> → inspiración de diseño, 581 mil seguidores. Mucha colaboración pagada; sirve solo por el formato "storytime" contado con texto.</p>
+<p class="r new">R//: 🟡 <b>@tabeadesign</b> → diseñadora de marcas y webs, 72,6 mil seguidores. Por revisar a fondo; su mejor Reel sacó 3,8 veces lo normal.</p>
+
+<h4>Análisis de Referentes (Nicho y NO nicho)</h4>
+<p class="r new"><b>Manera de editar:</b> 🟡 estilo limpio tipo Apple; nivel visual de Monks y Orbix. Lo que nos gusta, por cuenta: de Orbix, el fondo blanco y las pantallas en un monitor en perspectiva; de Tres Pi, las palabras clave grandes en violeta sobre negro; de MatiKali, la etiqueta con el enlace encima de la pantalla y los subtítulos palabra por palabra; de Agencia Rosa, los números grandes que aparecen con cada tarea; de Code Zenith, el cuarto oscuro con el celular apuntando al monitor. ⬜ Falta que Sara y Mateo elijan colores y tipografías concretas de esas cuentas.</p>
+<p class="r"><b>Forma de comunicar:</b> 🟡 segura, tranquila, frases cortas, sin tecnicismos.</p>
+<p class="r"><b>Valores y persona:</b> 🟡 claridad, cumplir lo que prometemos, trato directo. Kaiva como un solo equipo.</p>
+<p class="r new"><b>Formatos de video:</b> ✅ grabación de pantalla con manos, celular apuntando al monitor, proceso acelerado con resultado al final, antes y después, lista rápida. Todos sin cara.</p>
+<p class="r"><b>Estética:</b> 🟡 fondo blanco, limpia, con toque urbano y juvenil; acento violeta #8242F5.</p>
+
+<h4>Ideas de Contenido</h4>
+<p class="course">Si encuentras ideas con +100k likes, menos de un año de publicadas (que si te metes en la cuenta de la persona el resto de sus videos tiene en promedio 100-200k views COMO MÁXIMO puedes irlas anotando).</p>
+<p class="r new">Nota: ninguna pieza del nicho llega a 100 mil me gusta. Las que más se acercan son el Login de Code Zenith (91.781) y la parte 7 de MatiKali (76.390). Anoté las que cumplen los otros filtros (menos de un año, muy por encima de lo normal de su cuenta y virales por la idea), adaptadas a Kaiva y sin cara.</p>
+<ol class="ideas">
+<li>R//: ✅ Serie "Webs que tu empresa debería ver", parte 1, 2, 3… Portátil, manos y 3 webs reales.<small>Sale de MatiKali, Lugares random parte 7 (1 M vistas, 167 veces lo normal) · <a href="https://www.instagram.com/reel/DdOLA0Ws1sV/">ver</a></small></li>
+<li>R//: ✅ "Si tienes una agencia de viajes, mira estas 3 webs" (y luego aseguradoras, clínicas, constructoras).<small>Sale de MatiKali, para mujeres creativas (166 mil, 28×) · <a href="https://www.instagram.com/reel/DbpPb7WuU59/">ver</a></small></li>
+<li>R//: ✅ "¿Cuántas horas toma una web de verdad?", con las horas reales de cada paso del Método Siguiente Etapa (por completar con Mateo y Sara).<small>Sale de Agencia Rosa (311 mil, 195 comentarios) · <a href="https://www.instagram.com/reel/DTVR8KyiHK5/">ver</a></small></li>
+<li>R//: ✅ "Vamos a hacer la web de una agencia de viajes con 500 empresas afiliadas", con cierre "¿lo logramos?" (confirmar datos con Andrés).<small>Sale de Agencia Rosa, perritos y repostería (90 mil, 157 comentarios) · <a href="https://www.instagram.com/reel/DRcuoHUCE-m/">ver</a></small></li>
+<li>R//: ✅ "Hagamos la web de una clínica dental en 30 segundos", pantalla acelerada con "la web final al final".<small>Sale de atnndesign, childcare brand (96 mil, 4,6×) · <a href="https://www.instagram.com/reel/DbWF4rzxVUF/">ver</a></small></li>
+<li>R//: ✅ "Comenta WEB y te mando una revisión de tu página en video", sobre una interacción bonita de una web de Kaiva en bucle.<small>Sale de Code Zenith, Login animado (2,9 M, 14.843 comentarios) · <a href="https://www.instagram.com/reel/DR8ujFHD0zs/">ver</a></small></li>
+<li>R//: ✅ "4 señales de que tu web se quedó en la etapa anterior", 2 segundos por señal.<small>Sale de Code Zenith, Top 4 herramientas (1,9 M) · <a href="https://www.instagram.com/reel/DRYrEa5jzVh/">ver</a></small></li>
+<li>R//: ✅ "Le hicimos una web a mi mamá por su cumpleaños", con "Comenta REGALO".<small>Sale de Code Zenith, regalo de cumpleaños (1,6 M, 51.242 comentarios) · <a href="https://www.instagram.com/reel/Dbe_D02vV1a/">ver</a></small></li>
+<li>R//: 🟡 "Nos preguntaron qué hace Kaiva y nos quedamos en blanco. Así que hicimos esto", con 3 resultados de clientes (por confirmar).<small>Sale de Tres Pi, 10 años en 60 segundos (más de 12 meses: solo como idea) · <a href="https://www.instagram.com/reel/DJKxUdgJq17/">ver</a></small></li>
+<li>R//: ✅ "Le pedimos a la IA que hiciera la web de una agencia de viajes. Esto hizo… y esto hicimos nosotros" (Reel o carrusel).<small>Sale de Agencia Rosa, ChatGPT vs. agencia (12.679 me gusta, 4,5×) · <a href="https://www.instagram.com/p/DctsYgyiDu7/">ver</a></small></li>
+<li>R//: ✅ Carrusel "Tu empresa en 2022 vs. en 2027": Excel contra portal, catálogo en PDF contra web.<small>Sale de Code Zenith, 2025 vs. 2026 (90.238 me gusta, 6,9×) · <a href="https://www.instagram.com/p/DbHz3WCDxYK/">ver</a></small></li>
+<li>R//: ✅ Carrusel "Tendencias de webs para empresas en 2027", para enero.<small>Sale de Tres Pi, Tendencias de diseño 2026 (7,5×) · <a href="https://www.instagram.com/p/DTTiDDYEUC5/">ver</a></small></li>
+<li>R//: ✅ Carrusel "Las medidas de imágenes para tu web que nadie te explica".<small>Sale de Tres Pi, guía de formatos (5,5×) · <a href="https://www.instagram.com/p/DZNv7W7EZ5L/">ver</a></small></li>
+<li>R//: ✅ Carrusel "Comenta PORTAL: cómo saber si tu empresa necesita un portal y no otra hoja de Excel".<small>Sale de Ingenio, Comenta Potencia (935 comentarios, 8,1×) · <a href="https://www.instagram.com/p/DZMCnmrDKia/">ver</a></small></li>
+<li>R//: ✅ Carrusel "Tu web tiene un solo trabajo antes de que el cliente te escriba".<small>Sale de Orbix, web de mercado (3,7×) · <a href="https://www.instagram.com/p/DWCKP5yFRet/">ver</a></small></li>
+<li>R//: ✅ Carrusel "El año de tu web, estilo Wrapped", para diciembre.<small>Sale de MatiKali, Tu año en diseño (6,4×) · <a href="https://www.instagram.com/p/DR0dhkPDuqz/">ver</a></small></li>
+<li>R//: ✅ Carrusel "7 cosas que aprendimos haciendo webs para empresas", con fotos del escritorio y la pantalla.<small>Sale de Agencia Rosa, 9 cosas que aprendí (680 comentarios) · <a href="https://www.instagram.com/p/DbGYfXWCAT2/">ver</a></small></li>
+<li>R//: ✅ Carrusel "Lo que la web de [marca colombiana famosa] hace bien y tu empresa puede copiar".<small>Sale de Ingenio, análisis de Bukele (6,5×) · <a href="https://www.instagram.com/p/DZWHdqLDAJ8/">ver</a></small></li>
+<li>R//: ✅ Carrusel "El portal de un cliente en 5 pantallas", con "¿Tu empresa todavía hace esto en Excel? Hablemos".<small>Sale de Orbix, FleetTrack (3,7×) · <a href="https://www.instagram.com/p/DeMzRuolDsY/">ver</a></small></li>
+<li>R//: 🟡 Serie "Ingredientes": los objetos (modelo 3D, colores, letra, fotos) y luego la web armada con ellos.<small>Idea de Kaiva, con la estructura de Agencia Rosa y atnndesign. Falta tener webs con 3D para mostrar.</small></li>
+</ol>
+
+<h2>CONCEPTO 2 – Marca personal y cuentas</h2>
+
+<h3>· Lo que verás en este módulo ·</h3>
+<div class="course">
+<p>Quiero que pienses en esto un segundo: cuando alguien en tu nicho necesita lo que tú ofreces, ¿en quién piensa primero? Si la respuesta no eres tú, este módulo es exactamente lo que necesitas.</p>
+<p>Porque aquí no vamos a hablar de "cómo conseguir seguidores". Vamos a construir algo mucho más valioso: una marca personal que vende. Una que hace que tu cliente ideal te recuerde primero, confíe en ti y te elija a ti por encima de cualquier otra opción.</p>
+<p>Vas a entender cómo funciona el posicionamiento de marca y el Top of Mind, el mismo principio que usa Coca Cola para que pienses en ella cada vez que alguien dice "gaseosa". Vas a desarrollar el concepto de tu marca, tu mensaje de marketing y tu estrategia de contenido para vender, crecer y conectar con las personas correctas.</p>
+<p>Todo lo que vas a aprender aplica para contenido formato corto y vertical: Instagram, TikTok, Facebook, Threads y YouTube Shorts. Conecta tus videos de Instagram a Facebook y se comparten las vistas.</p>
+</div>
+
+<h3>Tarea: dejar listas tus cuentas (pausa el módulo)</h3>
+<ul>
+<li>Instagram y TikTok por separado. <span class="st">✅ existen.</span></li>
+<li>Crear una página de Facebook. <span class="st">⬜ falta.</span></li>
+<li>Conectar Instagram con la página de Facebook y con Threads. <span class="st">⬜ falta.</span></li>
+<li>Verificar que al publicar un Reel aparezca "Compartir también en…" con Threads y Facebook activados. <span class="st">⬜ verificar al terminar.</span></li>
+<li>Crear YouTube Shorts. <span class="st">⬜ falta.</span></li>
+</ul>
+
+<h3>Plantilla de estrategia de marca personal</h3>
+<p class="r"><b>Elevator pitch:</b> 🟡 "Ayudamos a empresas medianas que acaban de cambiar de etapa a tener una web, una marca y sistemas a la altura de lo que ya son, con el Método Siguiente Etapa, sin precios ni plazos sorpresa y hablando directo con quien diseña y quien programa."</p>
+<p class="r"><b>Valores (tres):</b> 🟡 claridad · cumplir lo que prometemos · trato directo.</p>
+<p class="r"><b>Forma de comunicar (tres características):</b> 🟡 segura y tranquila · frases cortas y sin tecnicismos · cercana (tutea y habla directo).</p>
+<p class="r"><b>Avatar:</b> 🟡 dueño o gerente de empresa mediana colombiana que acaba de cambiar de etapa. Desea que su presencia digital esté a la altura de la empresa. Frustraciones: web atrasada, procesos en Excel y WhatsApp, estudios con precios o plazos sorpresa. ⬜ Validar con entrevistas.</p>
+<p class="r new"><b>Pilares:</b> 🟡 la web de tu empresa; marca; sistemas y portales; proceso y tiempos; antes y después. Propuesta de series fijas para cada pilar, según lo que funcionó: "Webs que tu empresa debería ver" (web), "¿Cuántas horas toma…?" (proceso y tiempos), "Ingredientes" (marca y web, con 3D) y "Tu empresa en 2022 vs. en 2027" (sistemas y portales).</p>
+<p class="r"><b>Biografía:</b> 🟡 "Ayudamos a empresas medianas en su siguiente etapa a tener web, marca y sistemas a su altura. Método Siguiente Etapa. Escribe WEB por DM." ⬜ Falta la autoridad (datos de CS Travel por confirmar con Andrés).</p>
+<p class="r new"><b>Edición y producción a adoptar:</b> 🟡 videos de pantalla limpios, zoom suave, texto corto en pantalla, estilo Monks y Orbix. Afinado con los Reels: 12 a 30 segundos para lo visual y hasta 60 para los casos; subtítulos palabra por palabra; el enlace o el nombre de la web en una etiqueta encima; la llamada a la acción escrita dentro del video, no solo en la descripción; resultado prometido al inicio y mostrado al final.</p>
+<p class="r"><b>Vibe visual (Pinterest):</b> ⬜ tablero por crear. Base: blanco, negro #0B0B0E, violeta de acento.</p>
+</main>
+</body>
+</html>
