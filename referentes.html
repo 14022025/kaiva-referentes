@@ -197,6 +197,12 @@ footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-si
 .coms .q{color:var(--ink)}
 .coms .lk{font-size:12px;color:var(--accent);font-weight:600;white-space:nowrap}
 .coms .why{display:block;font-size:13px;color:var(--ink-2)}
+
+.say{font:inherit;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--accent);cursor:pointer;vertical-align:middle;margin-left:8px;white-space:nowrap}
+.say[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.say:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.say{margin-left:0;font-size:13px;padding:8px 14px}
+@media print{.say{display:none}}
 </style>
 </head>
 <body>
@@ -769,7 +775,7 @@ function pieceHTML(p){
         <div><h4>Por qué funcionó</h4><ul>${p.porque.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></div>
         <p class="fine">${esc(p.fecha)}${p.dur ? " · " + p.dur : ""}${car ? ` · ${p.laminas} láminas · promedio de la cuenta: ${p.prom} me gusta` : ` · un Reel normal de la cuenta: ${p.normal} vistas`} · capa ${esc(p.capa)}</p>
       </details>
-      <div class="actions"><a class="btn primary" href="${IG(p.id, p.tipo)}" target="_blank" rel="noopener">Ver en Instagram ↗</a>${starBtn("p:" + p.id)}</div>
+      <div class="actions"><a class="btn primary" href="${IG(p.id, p.tipo)}" target="_blank" rel="noopener">Ver en Instagram ↗</a><button type="button" class="btn say say-card" aria-pressed="false">🔊 Escuchar</button>${starBtn("p:" + p.id)}</div>
     </div></article>`;
 }
 
@@ -782,7 +788,7 @@ function ideaHTML(i, n){
     <p class="cara"><b>Sin cara</b><span>${esc(i.cara)}</span></p>
     <details class="more"><summary>Ver guion</summary><p class="script" id="guion-${n}">${esc(i.s)}</p><p class="fine">Capa ${esc(i.capa)}</p></details>
     <span class="from">${from}</span>
-    <div class="actions"><button class="btn copy" data-n="${n}">Copiar guion</button>${starBtn("i:" + i.t)}${ref ? `<button class="btn" data-goto="${ref.id}">Ver la original</button>` : ""}</div></article>`;
+    <div class="actions"><button type="button" class="btn say say-card" aria-pressed="false">🔊 Escuchar</button><button class="btn copy" data-n="${n}">Copiar guion</button>${starBtn("i:" + i.t)}${ref ? `<button class="btn" data-goto="${ref.id}">Ver la original</button>` : ""}</div></article>`;
 }
 
 function groupHTML(g, items, kind){
@@ -889,5 +895,42 @@ let last = "inicio"; try { last = localStorage.getItem(KEY + "-tab") || "inicio"
 showTab(document.getElementById("p-" + last) ? last : "inicio");
 </script>
 
+<script>
+(function(){
+  var sintesis = window.speechSynthesis; if (!sintesis) return;
+  var actual = null, vozEs = null;
+  function elegirVoz(){ var v = sintesis.getVoices(); var pref = ["es-CO","es-MX","es-US","es-419","es-ES"];
+    for (var i=0;i<pref.length;i++){ var m = v.find(function(x){ return x.lang && x.lang.replace("_","-").toLowerCase() === pref[i].toLowerCase(); }); if (m) return m; }
+    return v.find(function(x){ return x.lang && x.lang.toLowerCase().indexOf("es") === 0; }) || null; }
+  vozEs = elegirVoz(); sintesis.onvoiceschanged = function(){ vozEs = elegirVoz(); };
+  function limpiar(t){ return t.replace(/[★☆↗→←♥🔊]/g, " ").replace(/\s+/g, " ").trim(); }
+  function detener(){ sintesis.cancel(); if (actual){ actual.setAttribute("aria-pressed","false"); actual.textContent = actual.dataset.label; } actual = null; }
+  function hablar(texto, boton){
+    if (actual === boton){ detener(); return; }
+    detener(); texto = limpiar(texto); if (!texto) return;
+    actual = boton; boton.dataset.label = boton.dataset.label || boton.textContent;
+    boton.setAttribute("aria-pressed","true"); boton.textContent = "Detener";
+    var partes = texto.match(/[^.!?¿¡]+[.!?]*|[¿¡][^?!]+[?!]/g) || [texto];
+    partes.forEach(function(p, i){ var u = new SpeechSynthesisUtterance(p.trim()); u.lang = vozEs ? vozEs.lang : "es-CO"; if (vozEs) u.voice = vozEs; u.rate = 1;
+      if (i === partes.length - 1) u.onend = function(){ if (actual === boton) detener(); };
+      sintesis.speak(u); });
+  }
+  function textoDe(el){ var c = el.cloneNode(true); c.querySelectorAll(".actions,.strip,.say,.tema,button,img,.meta,.ph").forEach(function(x){ x.remove(); }); return c.textContent; }
+  function textoSeccion(h){ var nivel = +h.tagName[1], partes = [h.textContent], n = h.nextElementSibling;
+    while (n && !(/^H[1-6]$/.test(n.tagName) && +n.tagName[1] <= nivel)){
+      if (!n.matches(".filters,.tablebox,.ideas,.pieces,#ideasGroups,#piezasGroups,.starter,.tema,script,style")) partes.push(textoDe(n));
+      n = n.nextElementSibling; }
+    return partes.join(". "); }
+  function ponerEnTitulos(sel){ document.querySelectorAll(sel).forEach(function(h){ if (h.querySelector(".say")) return;
+    var b = document.createElement("button"); b.type = "button"; b.className = "say"; b.textContent = "🔊 Escuchar"; b.setAttribute("aria-pressed","false");
+    b.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); hablar(h.closest(".lesson") ? textoDe(h.closest(".lesson")) : textoSeccion(h), b); });
+    h.appendChild(b); }); }
+  ponerEnTitulos(window.KAIVA_VOZ_TITULOS || "h2, .lesson h3");
+  document.addEventListener("click", function(e){ var b = e.target.closest(".say-card"); if (!b) return;
+    hablar(textoDe(b.closest(".piece, .idea")), b); });
+  window.addEventListener("beforeunload", function(){ sintesis.cancel(); });
+  window.kaivaVozTitulos = function(){ ponerEnTitulos(window.KAIVA_VOZ_TITULOS || "h2, .lesson h3"); };
+})();
+</script>
 </body>
 </html>
